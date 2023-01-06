@@ -32,7 +32,7 @@ bool solovayStrassen(uint64_t number, uint64_t accuracy)
     jacobi = jacobiSymbol(a,n);
     //printf("jacobiSymbol(a:%lld,n:%lld):%lld\n", a, n, jacobi);
     eulersCritereon = modulo(a,(n-1)/2,n);
-    //printf("modulo(a:%lld,(n-1)/2:%lld,n:%lld):%lld\n", a, n, n, eulersCritereon);
+    //printf("modulo(a:%llu,(n-1)/2:%llu,n:%llu):%llu\n", a, n, n, eulersCritereon);
     switch(jacobi)
     {
       case -1:

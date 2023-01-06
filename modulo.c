@@ -2,7 +2,8 @@
 #include<bn.h>
 uint64_t modulo(uint64_t Base, uint64_t exponent, uint64_t mod)
 {
-    //char string1[1000];
+    uint64_t final;
+    char string1[1000];
     //char string2[1000];
     //char string3[1000];
 
@@ -56,6 +57,11 @@ uint64_t modulo(uint64_t Base, uint64_t exponent, uint64_t mod)
 
     }
     //printf("endloop\n");
+
     bignum_mod(&x1, &mod1, &temp);
-    return bignum_to_int(&temp);
+    //bignum_to_string(&temp, string1, 1000);
+    //printf("modulo return:%s)\n", string1);
+    final = bignum_to_int(&temp);
+    //printf("final mod:%llu\n", final);
+    return final;//bignum_to_int(&temp);
 }

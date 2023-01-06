@@ -30,7 +30,7 @@ There may well be room for performance-optimizations and improvements.
 #endif
 
 /* Size of big-numbers in bytes */
-#define BN_ARRAY_SIZE    (128 / WORD_SIZE)
+#define BN_ARRAY_SIZE    (256 / WORD_SIZE)
 
 
 /* Here comes the compile-time specialization for how large the underlying array size should be. */
@@ -89,7 +89,7 @@ enum { SMALLER = -1, EQUAL = 0, LARGER = 1 };
 /* Initialization functions: */
 void bignum_init(struct bn* n);
 void bignum_from_int(struct bn* n, DTYPE_TMP i);
-int  bignum_to_int(struct bn* n);
+uint64_t  bignum_to_int(struct bn* n);
 void bignum_from_string(struct bn* n, char* str, int nbytes);
 void bignum_to_string(struct bn* n, char* str, int maxsize);
 
