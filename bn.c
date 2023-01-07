@@ -324,7 +324,7 @@ void bignum_div(struct bn* a, struct bn* b, struct bn* c)
     }
     _rshift_one_bit(&current);                //   current >>= 1;
     _rshift_one_bit(&denom);                  //   denom >>= 1;
-  }                                           // return answer;
+  }
 }
 
 

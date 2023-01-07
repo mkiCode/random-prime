@@ -23,7 +23,6 @@ bool solovayStrassen(uint64_t number, uint64_t accuracy)
 
   while(k--)
   {
-    //3 bytes for a appropriate testing size
     BCryptGenRandom(alg, (PUCHAR)&a, 8,0);
     //printf("random lld:%lld\n", a);
     while(((a)<=2)||((n-1)<=a))
