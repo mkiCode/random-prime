@@ -1,1 +1,1 @@
-gcc ./*.c -lbcrypt -I. -o run
+gcc ./*.c -lbcrypt  -o run

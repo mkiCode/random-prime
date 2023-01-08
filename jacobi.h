@@ -1,2 +1,3 @@
 #include<stdint.h>
-int8_t jacobiSymbol(uint64_t a, uint64_t n);
+#include"bn.h"
+void jacobiSymbol(struct bn* a2, struct bn* n2, int8_t* jacobi1);

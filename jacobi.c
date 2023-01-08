@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<stdint.h>
 #include<string.h>
-#include<bn.h>
+#include"bn.h"
 void swap(struct bn *a1, struct bn *b1)
 {
   //uint64_t temp;
@@ -13,12 +13,12 @@ void swap(struct bn *a1, struct bn *b1)
   bignum_assign(b1, &tmp);
   //*b = temp;
 }
-int8_t jacobiSymbol(uint64_t a, uint64_t n)
+ void jacobiSymbol(struct bn* a2, struct bn* n2, int8_t* jacobi1)
 {
   //printf("computing jacobi symbol...\n");
   int32_t t = 1;
-  struct bn a1;bignum_init(&a1);bignum_from_int(&a1, a);
-  struct bn n1;bignum_init(&n1);bignum_from_int(&n1, n);
+  struct bn a1;bignum_init(&a1);bignum_assign(&a1, a2);//bignum_from_int(&a1, a);
+  struct bn n1;bignum_init(&n1);bignum_assign(&n1, n2);//bignum_from_int(&n1, n);
   struct bn r1;bignum_init(&r1);bignum_from_int(&r1, 0);
   struct bn tmp;bignum_init(&tmp);bignum_from_int(&tmp, 0);
   struct bn tmp1;bignum_init(&tmp1);bignum_from_int(&tmp1, 0);
@@ -54,7 +54,7 @@ int8_t jacobiSymbol(uint64_t a, uint64_t n)
   }
   //printf("returning jacobi symbol\n");
   if(bignum_cmp(&n1,&one)==EQUAL)
-    return t;
+    *jacobi1 = t;
   else
-    return 0;
+    *jacobi1 =  0;
 }
