@@ -25,54 +25,28 @@ bool solovayStrassen(struct bn* num, uint64_t accuracy)
   struct bn temp1; bignum_init(&temp1);
   struct bn temp2;bignum_init(&temp2);
   struct bn temp3;bignum_init(&temp3);
-  //struct bn two;bignum_init(&two); bignum_from_int(&one, 1);
   struct bn two;bignum_init(&two); bignum_from_int(&two, 2);
-  //struct bn jacobi1;bignum_init(&jacobi1);
   int32_t isPrime;
 
   while(k--)
   {
-    //printf("1...\n");
-    BCryptGenRandom(alg, (PUCHAR)a1.array, 2,0);
-    //printf("random lld:%lld\n", a);
-
-    //printf("1.2...\n");
+    BCryptGenRandom(alg, (PUCHAR)a1.array, 32,0);
     while((bignum_cmp(&a1, &two)<=EQUAL)||(bignum_cmp(&n1, &a1)<=EQUAL))
-      BCryptGenRandom(alg, (PUCHAR)a1.array,2,0);
-//    a = 3301693;
-//    *(uint64_t*)a1.array = a;
-    //printf("generate random a:%llu...\n", a);
-    //printf("generate random bignum a:%llu...\n", *((uint64_t*)a1.array));
-    //printf("random lld:%lld\n", a);
-    //printf("2...\n");
+      BCryptGenRandom(alg, (PUCHAR)a1.array,32,0);
+
 
     jacobiSymbol(&a1,&n1, &jacobi1);
-    //printf("after jacobi\n");
-    //printf("a:%llu\n", a);
-    //printf("a1:%llu\n",  *((uint64_t*)a1.array));
-    //printf("n:%llu\n", n);
-    //printf("n1:%llu\n",  *((uint64_t*)n1.array));
-    //printf("jacobi:%d\n", jacobi);
-    //printf("jacobi1:%d\n", jacobi1);
-    //printf("jacobiSymbol(a:%lld,n:%lld):%lld\n", a, n, jacobi);
-    //printf("3...\n");
+
+
     bignum_assign(&temp1, &n1);bignum_dec(&temp1);bignum_div(&temp1, &two, &temp2);
     modulo(&a1,&temp2,&n1,&eulersCritereon1);
-    //printf("after modulo\n");
-    //printf("a:%llu\n", a);
-    //printf("a1:%llu\n",  *((uint64_t*)a1.array));
-    //printf("n:%llu\n", n);
-    //printf("n1:%llu\n",  *((uint64_t*)n1.array));
-    //printf("eulers:%llu...\n", eulersCritereon);
-    //printf("eulsers bignum:%llu...\n", *((uint64_t*)eulersCritereon1.array));
 
-    //printf("modulo(a:%llu,(n-1)/2:%llu,n:%llu):%llu\n", a, n, n, eulersCritereon);
-    //printf("4...\n");
+
     bignum_assign(&temp1, &n1);bignum_dec(&temp1);
     bignum_mod(&temp1, &n1, &temp2);bignum_assign(&temp1, &temp2);
     bignum_assign(&temp2, &n1);bignum_inc(&temp2);
     bignum_mod(&temp2, &n1, &temp3);bignum_assign(&temp2, &temp3);
-    
+
     switch(jacobi1)
     {
       case -1:
@@ -109,14 +83,15 @@ void main(void)//add argument for byte size
   {
 //    number = 0;
     //BCryptGenRandom(alg, (PUCHAR)&number, 3,0);
-    BCryptGenRandom(alg, (PUCHAR)num.array,2,0);
-//    number = *((uint64_t*)num.array);
+    do
+      BCryptGenRandom(alg, (PUCHAR)num.array,32,0);
+    while(!((*((uint32_t*)num.array))%2));
     printf("checking num:%llu...\n", bignum_to_int(&num));
     bignum_to_string(&num, string1, 3000);
     printf("checking bignum:%s\n", string1);
   }
   while(!solovayStrassen(&num, 10));
-  bignum_to_string(&num, string1, 1000);
+  bignum_to_string(&num, string1, 3000);
   printf("Random Prime bignum:%s\n", string1);
   //printf("Random Prime:%llu\n", *((uint64_t*)num.array));
   BCryptCloseAlgorithmProvider(alg,0);
