@@ -1,0 +1,3 @@
+
+#define WORD_SIZE 4
+#define BN_ARRAY_SIZE (256 / WORD_SIZE)

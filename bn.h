@@ -22,15 +22,9 @@ There may well be room for performance-optimizations and improvements.
 
 #include <stdint.h>
 #include <assert.h>
+#include "preprocessorOptions.h"
 
 
-/* This macro defines the word size in bytes of the array that constitues the big-number data structure. */
-#ifndef WORD_SIZE
-  #define WORD_SIZE 4
-#endif
-
-/* Size of big-numbers in bytes */
-#define BN_ARRAY_SIZE    (512 / WORD_SIZE)
 
 
 /* Here comes the compile-time specialization for how large the underlying array size should be. */
